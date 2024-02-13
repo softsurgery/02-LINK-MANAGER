@@ -6,15 +6,16 @@ export const CategoryComponent = (category: Category) => {
         <div id={category.id.toString()}>
             <div style={{ display: "flex", placeItems: "center" }}>
                 <img src={category.icon} height={30} style={{ margin: "5px" }}></img>
-                <h2>{category.name}</h2>
+                <h2 style={{ textDecoration: "underline" }}>{category.name} : </h2>
             </div>
 
-            <p>{category.description}</p>
-            <div style={{ display: "flex" }} >
+
+            <div>
                 {
-                    category.items.map((item) => {
+                    category.items.map((item, index) => {
                         return (
                             <ItemComponent
+                                key={index}
                                 {...item} />
                         )
                     })

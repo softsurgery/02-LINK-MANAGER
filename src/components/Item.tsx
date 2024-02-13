@@ -5,9 +5,9 @@ export const ItemComponent = (item: Item) => {
         window.open(item.link, '_blank');
     }
     return (
-        <div id={item.id.toString()} onClick={goto} style={{ display: "flex", placeItems: "center", cursor: "pointer" }}>
+        <div id={item.id.toString()} onClick={goto} style={{ display: "flex", width: "fit-content", placeItems: "center", cursor: "pointer", marginLeft: "20px" }}>
             <img src={item.icon} height={30} style={{ margin: "5px" }}></img>
-            <a>{item.title}</a>
+            <a style={{ fontSize: "1em" }}>{item.title}</a>
         </div>
     )
 }
