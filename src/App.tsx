@@ -1,23 +1,37 @@
 import { CategoryComponent } from "./components/Category"
 import { categories } from "./models/data"
+import styled from "styled-components";
+
+const Main = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center
+`;
+
+
+
 function App() {
 
   return (
     <>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", placeItems: "center" }}>
+      <div >
         <h1>Web Shortcuts</h1>
-        <div style={{textAlign:"center"}}>
-          <textarea cols={80} rows={10}></textarea>
-          <br />
-          <button>Manipulate Content</button>
-        </div>
-        
       </div>
 
       <hr />
-      <CategoryComponent
-        {...categories[0]}
-      />
+      <Main>
+        <div><CategoryComponent
+          category={categories[0]}
+        />
+        <CategoryComponent
+          category={categories[0]}
+        />
+        <CategoryComponent
+          category={categories[0]}
+        /></div>
+        
+      </Main>
+
     </>
   );
 }

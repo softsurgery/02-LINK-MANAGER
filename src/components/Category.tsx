@@ -1,25 +1,45 @@
+import styled from "styled-components"
 import { Category } from "../api/types"
 import { ItemComponent } from "./Item"
+import { Edit } from "lucide-react";
 
-export const CategoryComponent = (category: Category) => {
+const CategoryHeader = styled.div`
+    display: flex;
+    placeItems: center;
+    align-items: center;
+`;
+
+const CategoryTitle = styled.h2`
+    textDecoration: underline;
+    margin-right: 10px;
+`;
+
+const CategoryIcon = styled.img`
+    height: 30;
+    margin: 5px;
+`;
+
+interface CategoryComponentProps {
+    style?: React.CSSProperties;
+    category: Category;
+}
+
+export const CategoryComponent = ({ style, category }: CategoryComponentProps) => {
     return (
-        <div id={category.id.toString()}>
-            <div style={{ display: "flex", placeItems: "center" }}>
-                <img src={category.icon} height={30} style={{ margin: "5px" }}></img>
-                <h2 style={{ textDecoration: "underline" }}>{category.name} : </h2>
-            </div>
+        <div style={{ ...style, marginTop: "20px" }} id={category.id.toString()}>
+            <CategoryHeader>
+                <CategoryIcon src={category.icon}></CategoryIcon>
+                <CategoryTitle>  {category.name} : </CategoryTitle>
+                <Edit />
+            </CategoryHeader>
 
+            {
+                category.items.map((item, index) =>
+                    <ItemComponent
+                        key={index}
+                        item={item} />
+                )
+            }
 
-            <div>
-                {
-                    category.items.map((item, index) => {
-                        return (
-                            <ItemComponent
-                                key={index}
-                                {...item} />
-                        )
-                    })
-                }
-            </div>
         </div>)
 }

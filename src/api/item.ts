@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 import { Item } from './types';
 
-const baseUrl = 'http://example.com';
+const baseUrl = 'http://localhost/link_manager/items/';
 
 async function getAllItems(): Promise<Item[]> {
     try {
-        const response: AxiosResponse<Item[]> = await axios.get(`${baseUrl}/item`);
+        const response: AxiosResponse<Item[]> = await axios.get(`${baseUrl}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching items:', error);
@@ -15,7 +15,7 @@ async function getAllItems(): Promise<Item[]> {
 
 async function getItemById(id: number): Promise<Item> {
     try {
-        const response: AxiosResponse<Item> = await axios.get(`${baseUrl}/item/${id}`);
+        const response: AxiosResponse<Item> = await axios.get(`${baseUrl}${id}`);
         return response.data;
     } catch (error) {
         console.error(`Error fetching item with ID ${id}:`, error);
@@ -25,7 +25,11 @@ async function getItemById(id: number): Promise<Item> {
 
 async function createItem(newItem: Item): Promise<Item> {
     try {
-        const response: AxiosResponse<Item> = await axios.post(`${baseUrl}/item`, newItem);
+        const response: AxiosResponse<Item> = await axios.post(`${baseUrl}`, {
+            title: newItem.title,
+            icon: newItem.icon,
+            link: newItem.link,
+        });
         return response.data;
     } catch (error) {
         console.error('Error creating item:', error);

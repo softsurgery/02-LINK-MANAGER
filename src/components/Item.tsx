@@ -1,13 +1,43 @@
+import styled from "styled-components";
 import { Item } from "../api/types"
+import { Edit } from "lucide-react";
 
-export const ItemComponent = (item: Item) => {
+const ItemContainer = styled.div`
+    display: flex;
+    width: fit-content;
+    place-items: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+`;
+
+const ItemHeader = ItemContainer;
+
+const ItemIcon = styled.img`
+    height: 30;
+    margin: 5px;
+`;
+
+const ItemTitle = styled.h2`
+    font-size: 1em;
+    margin-right: 10px;
+`;
+
+interface ItemComponentProps {
+    style?: React.CSSProperties;
+    item: Item;
+}
+
+export const ItemComponent = ({style,item}: ItemComponentProps) => {
     const goto = () => {
         window.open(item.link, '_blank');
-    }
+    };
+
     return (
-        <div id={item.id.toString()} onClick={goto} style={{ display: "flex", width: "fit-content", placeItems: "center", cursor: "pointer", marginLeft: "20px" }}>
-            <img src={item.icon} height={30} style={{ margin: "5px" }}></img>
-            <a style={{ fontSize: "1em" }}>{item.title}</a>
-        </div>
-    )
+        <ItemContainer style={{ ...style, marginTop: "5px" }} id={item.id.toString()} >
+            <ItemHeader onClick={goto}><ItemIcon src={item.icon}></ItemIcon>
+                <ItemTitle>{item.title}</ItemTitle></ItemHeader>
+            <Edit />
+        </ItemContainer>
+    );
 }

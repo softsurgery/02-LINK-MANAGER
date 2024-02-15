@@ -11,8 +11,7 @@ class AppModel {
         makeAutoObservable(this, {
             categories: observable,
             currentText: observable,
-            //********************/
-            fetchCategories:action,
+            fetchCategories:action.bound,
         });
     }
 
